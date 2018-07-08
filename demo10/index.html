@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      var Hello = React.createClass({
+        getInitialState:  function() {
+          return {
+            opacity: 1.0
+          };
+        },
+        componentDidMount: function() {
+          //创建一个定时调用函数，周期100毫秒，定时改变组件的状态属性opacity
+          //用bind()方法来修正this指针,指向组件对象
+          this.timer = setInterval(function() {
+            //获取状态属性
+            var opacity = this.state.opacity;
+            
+            //每个周期减去0.05
+            opacity -= 0.05;
+            
+            //透明度小于0.1时重置
+            if (opacity < 0.1) {
+              opacity = 1.0;
+            }
+            
+            //更改状态属性
+            this.setState({
+              opacity: opacity
+            });
+          }.bind(this), 100);
+        },
+        render: function() {
+          return (
+            <div style={{opacity: this.state.opacity}}>
+              Hello {this.props.name}
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <Hello name="world" />,
+        document.getElementById("example")
+      );
+    </script>
+  </body>
+</html>

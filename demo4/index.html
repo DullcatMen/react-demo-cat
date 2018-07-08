@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      //组件类
+      var HelloMessage = React.createClass({
+        render: function () {
+          //组件的属性可以从组件类的this.props对象上获取
+          return <h1>Hello {this.props.name}</h1>
+        }
+      });
+			ReactDOM.render(
+        //添加组件属性，要主要JavaScript的保留字,class要写成className，for要写成htmlFor
+				<HelloMessage name="John" />,
+				document.getElementById('example')
+			);
+    </script>
+  </body>
+</html>
